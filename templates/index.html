@@ -28,8 +28,8 @@
                               {% endif %}
                              </span>
                           </div>
-                              {% if file["name"][-4:] == ".jpg" %}
-                                 <img src="/static/{{ file["location"] }}/{{ file["name"] }}">
+                              {% if file["name"][-4:].lower() in [".jpg", ".png", ".bmp"]  %}
+                                 <img src="/static/gallery/{{ file["location"] }}/{{ file["name"] }}">
                               {% else %}
                                  /static/{{ file["location"] }}/{{ file["name"] }}
                               {% endif %}
