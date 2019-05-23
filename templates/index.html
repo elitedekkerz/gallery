@@ -48,11 +48,10 @@
                                 
                                  {% else %}
                                  
-                                 <a class="image" href="/static/gallery/{{ file["location"] }}/{{ file["name"] }}"></a>
+                                 <a class="image"></a>
                                  <div id="light-bg" class="ui inverted center aligned container">
-                                    <button class="massive ui icon button">
-                                       <i class="file image icon"></i>click to view
-                                    </button>
+                                    <a href="/static/gallery/{{ file["location"] }}/{{ file["name"] }}"" class="massive ui icon button">
+                                       <i class="file image icon"></i>click to view</a>
                                  </div>
                                  
                                  {% endif %}
