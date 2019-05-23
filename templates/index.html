@@ -1,47 +1,78 @@
 <!DOCTYPE html>
-    <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <title>alkometri purkka edition</title>
-        <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=yes"/>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.js"></script>
-        <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.css">
-    </head>
-    <style>body {background-color: black}</style>
+   <html lang="en">
+   <head>
+      <meta charset="UTF-8">
+      <title>alkometri purkka edition</title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=yes"/>
+      <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.js"></script>
+      <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.css">
+   </head>
+   <style>
+      
+      body {background: linear-gradient(to bottom right, #222222, black) fixed;}
+         
+      #dark-bg {background-color:grey}
+      #light-bg {background-color:rgb(95, 95, 95);
+      padding:12%;
+      } 
+   </style>
 <body>
 <p></p>
 <div class="ui container">
-            <div class="ui four stackable cards">
+            <div class="ui four doubling cards">
                {% for file in files %}
-                    <div class="card">
-                      <div class="image">
-                          <div class="meta">
-                             <span>
-                              {% if file["age"] > 86400 %}
-                                 {{ (file["age"] / 86400)|int }} days ago
-                              {% elif file["age"] > 3600 %}
-                                 {{ (file["age"] / 3600)|int }} hours ago
-                              {% elif file["age"] > 60 %}
-                                 {{ (file["age"] / 60)|int }} minutes ago
-                              {% else %}
-                                 {{ (file["age"])|int }} seconds ago
-                              {% endif %}
-                             </span>
-                          </div>
-                              {% if file["name"][-4:].lower() in [".jpg", ".png", ".bmp"]  %}
-                                 <img src="/static/gallery/{{ file["location"] }}/{{ file["name"] }}">
-                              {% else %}
-                                 /static/{{ file["location"] }}/{{ file["name"] }}
-                              {% endif %}
-                      </div>
-                      <div class="extra content">
+               <div class="ui card">
+
+                     <div style="display:block" class="ui top attached label">
+                           <span>
+                              <i class="quote right icon"></i>{{ file["name"] }}<br>
+                            {% if file["age"] > 86400 %}
+                               {{ (file["age"] / 86400)|int }} days ago
+                            {% elif file["age"] > 3600 %}
+                               {{ (file["age"] / 3600)|int }} hours ago
+                            {% elif file["age"] > 60 %}
+                               {{ (file["age"] / 60)|int }} minutes ago
+                            {% else %}
+                               {{ (file["age"])|int }} seconds ago
+                            {% endif %}
+                           </span>
+                     </div>
+                     <p></p>
+
+                                 <a class="image" href="/static/gallery/{{ file["location"] }}/{{ file["name"] }}">
+                          
+                                 {% if file["name"][-4:].lower() in [".jpg", ".png", ".bmp"]  %}
+                                 <img src="/static/gallery/{{ file["location"] }}/{{ file["name"] }}"></a>
+                     
+                                
+                                 {% else %}
+                                 
+                                 <a class="image" href="/static/gallery/{{ file["location"] }}/{{ file["name"] }}"></a>
+                                 <div id="light-bg" class="ui inverted center aligned container">
+                                    <button class="massive ui icon button">
+                                       <i class="file image icon"></i>click to view
+                                    </button>
+                                 </div>
+                                 
+                                 {% endif %}
+
+                     <div class="content">
+                          
                         <span>
-                          <i class="large yellow beer icon"></i>
-                          <a href="{{ file["location"] }}">{{ file["location"] }}</a>
+                          
+                          <i class="user icon"></i>{{file["location"].split("/")[-1]}}
                         </span>
-                      </div>
-                    </div>
+                     </div>
+                     
+                     <div class="ui inverted bottom attached button">
+                           <a href="{{ file["location"] }}"><i class="eye icon"></i>View all from this user</a>
+                           
+                     </div>
+
+               </div>
+                 
                {% endfor %}
-            </div>
-          </div>
+               </div>
+</div>
 </body>
