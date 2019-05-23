@@ -2,7 +2,7 @@
    <html lang="en">
    <head>
       <meta charset="UTF-8">
-      <title>alkometri purkka edition</title>
+      <title>Elitedekkerz Galleria</title>
       <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=yes"/>
       <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
       <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.js"></script>
@@ -20,7 +20,7 @@
 <body>
 <p></p>
 <div class="ui container">
-            <div class="ui four doubling cards">
+            <div class="ui four stackable cards">
                {% for file in files %}
                <div class="ui card">
 
@@ -38,39 +38,31 @@
                             {% endif %}
                            </span>
                      </div>
-                     <p></p>
-
+                                 <p></p>
                                  <a class="image" href="/static/gallery/{{ file["location"] }}/{{ file["name"] }}">
                           
                                  {% if file["name"][-4:].lower() in [".jpg", ".png", ".bmp"]  %}
                                  <img src="/static/gallery/{{ file["location"] }}/{{ file["name"] }}"></a>
-                     
-                                
+                                 
                                  {% else %}
                                  
                                  <a class="image"></a>
                                  <div id="light-bg" class="ui inverted center aligned container">
                                     <a href="/static/gallery/{{ file["location"] }}/{{ file["name"] }}"" class="massive ui icon button">
-                                       <i class="file image icon"></i>click to view</a>
+                                    <i class="file image icon"></i>click to view</a>
                                  </div>
                                  
                                  {% endif %}
 
                      <div class="content">
-                          
                         <span>
-                          
-                          <i class="user icon"></i>{{file["location"].split("/")[-1]}}
+                        <i class="user icon"></i>{{file["location"].split("/")[-1]}}
                         </span>
                      </div>
-                     
                      <div class="ui inverted bottom attached button">
                            <a href="{{ file["location"] }}"><i class="eye icon"></i>View all from this user</a>
-                           
                      </div>
-
                </div>
-                 
                {% endfor %}
                </div>
 </div>
