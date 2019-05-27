@@ -9,13 +9,12 @@
       <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.css">
    </head>
    <style>
-      
       body {background: linear-gradient(to bottom right, #222222, black) fixed;}
-         
-      #dark-bg {background-color:grey}
+      #dark-label {background-color:#e8e8e8;
+      font-size: 10pt;}
       #light-bg {background-color:rgb(95, 95, 95);
       padding:12%;
-      } 
+      }
    </style>
 <body>
 <p></p>
@@ -24,46 +23,49 @@
                {% for file in files %}
                <div class="ui card">
 
-                     <div style="display:block" class="ui top attached label">
-                           <span>
-                              <i class="quote right icon"></i>{{ file["name"] }}<br>
-                            {% if file["age"] > 86400 %}
-                               {{ (file["age"] / 86400)|int }} days ago
-                            {% elif file["age"] > 3600 %}
-                               {{ (file["age"] / 3600)|int }} hours ago
-                            {% elif file["age"] > 60 %}
-                               {{ (file["age"] / 60)|int }} minutes ago
-                            {% else %}
-                               {{ (file["age"])|int }} seconds ago
-                            {% endif %}
-                           </span>
+                  <div id="dark-label" class="ui fluid label">
+                     <span>
+                     <i class="quote right icon"></i>{{ file["name"] }}<p></p>
+                     {% if file["age"] > 86400 %}
+                        {{ (file["age"] / 86400)|int }} days ago
+                     {% elif file["age"] > 3600 %}
+                        {{ (file["age"] / 3600)|int }} hours ago
+                     {% elif file["age"] > 60 %}
+                        {{ (file["age"] / 60)|int }} minutes ago
+                     {% else %}
+                        {{ (file["age"])|int }} seconds ago
+                     {% endif %}
+                     </span>
+                  </div>
+                  
+                  <a class="image" href="/static/gallery/{{ file["location"] }}/{{ file["name"] }}">
+                  {% if file["name"][-4:].lower() in [".jpg", ".png", ".bmp"]  %}
+                  <img width="100%" src="/static/gallery/{{ file["location"] }}/{{ file["name"] }}"></a>
+                  
+                  {% else %}
+               
+                  <div id="light-bg" class="content">
+                     <div class="ui inverted center aligned container">
+                        <a class="ui massive icon button" href="/static/gallery/{{ file["location"] }}/{{ file["name"] }}">
+                        <i class="file image icon"></i>click to view</a>
                      </div>
-                                 <p></p>
-                                 <a class="image" href="/static/gallery/{{ file["location"] }}/{{ file["name"] }}">
-                          
-                                 {% if file["name"][-4:].lower() in [".jpg", ".png", ".bmp"]  %}
-                                 <img src="/static/gallery/{{ file["location"] }}/{{ file["name"] }}"></a>
-                                 
-                                 {% else %}
-                                 
-                                 <a class="image"></a>
-                                 <div id="light-bg" class="ui inverted center aligned container">
-                                    <a href="/static/gallery/{{ file["location"] }}/{{ file["name"] }}"" class="massive ui icon button">
-                                    <i class="file image icon"></i>click to view</a>
-                                 </div>
-                                 
-                                 {% endif %}
+                  </div>
+               
+                  {% endif %}
 
-                     <div class="content">
-                        <span>
-                        <i class="user icon"></i>{{file["location"].split("/")[-1]}}
-                        </span>
+                  <div class="ui content">
+                     <div class="ui circular label">
+                     <span>
+                     <i class="user icon"></i>{{file["location"].split("/")[-1]}}
+                     </span>
                      </div>
-                     <div class="ui inverted bottom attached button">
-                           <a href="{{ file["location"] }}"><i class="eye icon"></i>View all from this user</a>
-                     </div>
+                  </div>
+                  
+                  <div class="ui inverted bottom attached button">
+                        <a href="{{ file["location"] }}"><i class="eye icon"></i>View all from this user</a>
+                  </div>
                </div>
                {% endfor %}
-               </div>
+            </div>
 </div>
 </body>
