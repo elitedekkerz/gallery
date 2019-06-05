@@ -9,7 +9,8 @@
       <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.css">
    </head>
    <style>
-      body {background: linear-gradient(to bottom right, #222222, black) fixed;}
+      #black-bg {background: linear-gradient(to bottom right, #222222,#2b2b2b) fixed;
+         min-height:100vh;}
       #dark-label {background-color:#e8e8e8;
       font-size: 10pt;}
       #light-bg {background-color:rgb(95, 95, 95);
@@ -17,9 +18,24 @@
       }
    </style>
 <body>
-<p></p>
+      <div class="ui inverted left vertical sidebar labeled icon menu">
+         <a class="item">
+            item</a>
+      </div>
+      
+<div class="pusher">
+<div id="black-bg">
+<br>
 <div class="ui container">
+      <button class="ui left icon button" tabindex="0" onclick="menulist()" type="button">
+         <i class="angle left icon"></i>
+      </button>
+      <br><br><br>
+      <script>function menulist() {$('.ui.sidebar').sidebar('toggle');}</script>
+</div>
+      <div class="ui container">
             <div class="ui four stackable cards">
+               
                {% for file in files %}
                <div class="ui card">
 
@@ -70,5 +86,7 @@
                </div>
                {% endfor %}
             </div>
+      </div>
+</div>
 </div>
 </body>
