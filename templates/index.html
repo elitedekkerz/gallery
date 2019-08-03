@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-   <html lang="en">
+<html lang="en">
    <head>
       <meta charset="UTF-8">
       <title>Elitedekkerz Galleria</title>
@@ -9,86 +9,86 @@
       <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.css">
    </head>
    <style>
-      #black-bg {background: linear-gradient(to bottom right, #222222,#2b2b2b) fixed;
-         min-height:100vh;}
+#black-bg {background: linear-gradient(to bottom right, #222222,#2b2b2b) fixed;
+   min-height:100vh;}
       #dark-label {background-color:#e8e8e8;
-      font-size: 10pt;}
-      #light-bg {background-color:rgb(95, 95, 95);
+         font-size: 10pt;}
+   #light-bg {background-color:rgb(95, 95, 95);
       padding:12%;
-      }
+   }
    </style>
-<body>
+   <body>
       <div class="ui inverted left vertical sidebar labeled icon menu">
          <a class="item">
-				 {% if path %}
-					  <nobr>
-						  {% set ns = namespace(p='') %}
-						  {% for l in ["gallery"]+path.split("/") %}
-							 {% set ns.p = ns.p+"/"+l %}
-							 <a href="{{ ns.p }}">{{l}}</a>/
-						  {% endfor %}
-					  </nobr>
-				 {% endif %}
-			</a>
-          {% for dir in dirs %}
-          <a class="item">
-              <a href="/gallery{{"/"+path if path}}/{{ dir }}">{{dir}}</a>
-          {% endfor %}
-          </a>
+            {% if path %}
+            <nobr>
+            {% set ns = namespace(p='') %}
+            {% for l in ["gallery"]+path.split("/") %}
+            {% set ns.p = ns.p+"/"+l %}
+            <a href="{{ ns.p }}">{{l}}</a>/
+            {% endfor %}
+            </nobr>
+            {% endif %}
+         </a>
+         {% for dir in dirs %}
+         <a class="item">
+            <a href="/gallery{{"/"+path if path}}/{{ dir }}">{{dir}}</a>
+            {% endfor %}
+         </a>
       </div>
-      
-<div class="pusher">
-<div id="black-bg">
-<br>
-<div class="ui container">
-      <button class="ui left icon button" tabindex="0" onclick="menulist()" type="button">
-         <i class="angle left icon"></i>
-      </button>
-      <br><br><br>
-      <script>function menulist() {$('.ui.sidebar').sidebar('toggle');}</script>
-</div>
-      <div class="ui container">
-            <div class="ui four stackable cards">
-               
-               {% for file in files %}
-               <div class="ui card">
 
-                  <div id="dark-label" class="ui fluid label">
-                     <span>
-                     <i class="quote right icon"></i>{{ file["name"] }}<p></p>
-                     {% if file["age"] > 86400 %}
-                        {{ (file["age"] / 86400)|int }} days ago
-                     {% elif file["age"] > 3600 %}
-                        {{ (file["age"] / 3600)|int }} hours ago
-                     {% elif file["age"] > 60 %}
-                        {{ (file["age"] / 60)|int }} minutes ago
+      <div class="pusher">
+         <div id="black-bg">
+            <br>
+            <div class="ui container">
+               <button class="ui left icon button" tabindex="0" onclick="menulist()" type="button">
+                  <i class="angle left icon"></i>
+               </button>
+               <br><br><br>
+               <script>function menulist() {$('.ui.sidebar').sidebar('toggle');}</script>
+            </div>
+            <div class="ui container">
+               <div class="ui four stackable cards">
+
+                  {% for file in files %}
+                  <div class="ui card">
+
+                     <div id="dark-label" class="ui fluid label">
+                        <span>
+                           <i class="quote right icon"></i>{{ file["name"] }}<p></p>
+                           {% if file["age"] > 86400 %}
+                           {{ (file["age"] / 86400)|int }} days ago
+                           {% elif file["age"] > 3600 %}
+                           {{ (file["age"] / 3600)|int }} hours ago
+                           {% elif file["age"] > 60 %}
+                           {{ (file["age"] / 60)|int }} minutes ago
+                           {% else %}
+                           {{ (file["age"])|int }} seconds ago
+                           {% endif %}
+                        </span>
+                     </div>
+
+                     <a class="image" href="/static/gallery/{{ file["location"] }}/{{ file["name"] }}">
+                        {% if file["name"][-4:].lower() in [".jpg", ".png", ".bmp"]  %}
+                        <img width="100%" src="/static/gallery/{{ file["location"] }}/{{ file["name"] }}"></a>
+
                      {% else %}
-                        {{ (file["age"])|int }} seconds ago
+
+                     <div id="light-bg" class="content">
+                        <div class="ui inverted center aligned container">
+                           <a class="ui massive icon button" href="/static/gallery/{{ file["location"] }}/{{ file["name"] }}">
+                              <i class="file image icon"></i>click to view</a>
+                        </div>
+                     </div>
+
                      {% endif %}
-                     </span>
-                  </div>
-                  
-                  <a class="image" href="/static/gallery/{{ file["location"] }}/{{ file["name"] }}">
-                  {% if file["name"][-4:].lower() in [".jpg", ".png", ".bmp"]  %}
-                  <img width="100%" src="/static/gallery/{{ file["location"] }}/{{ file["name"] }}"></a>
-                  
-                  {% else %}
-               
-                  <div id="light-bg" class="content">
-                     <div class="ui inverted center aligned container">
-                        <a class="ui massive icon button" href="/static/gallery/{{ file["location"] }}/{{ file["name"] }}">
-                        <i class="file image icon"></i>click to view</a>
+                     <div class="ui inverted bottom attached button">
+                        <a href="{{ file["location"] }}">{{file["location"].split("/")[-1]}}</a>
                      </div>
                   </div>
-               
-                  {% endif %}
-                  <div class="ui inverted bottom attached button">
-                        <a href="{{ file["location"] }}">{{file["location"].split("/")[-1]}}</a>
-                  </div>
+                  {% endfor %}
                </div>
-               {% endfor %}
-					</div>
+            </div>
+         </div>
       </div>
-</div>
-</div>
-</body>
+   </body>
