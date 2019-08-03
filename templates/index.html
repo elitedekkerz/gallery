@@ -49,10 +49,8 @@
             </div>
             <div class="ui container">
                <div class="ui four stackable cards">
-
                   {% for file in files %}
                   <div class="ui card">
-
                      <div id="dark-label" class="ui fluid label">
                         <span>
                            <i class="quote right icon"></i>{{ file["name"] }}<p></p>
@@ -67,23 +65,18 @@
                            {% endif %}
                         </span>
                      </div>
-
                      <a class="image" href="/static/gallery/{{ file["location"] }}/{{ file["name"] }}">
                         {% if file["name"][-4:].lower() in [".jpg", ".png", ".bmp"]  %}
-                        <img width="100%" src="/static/gallery/{{ file["location"] }}/{{ file["name"] }}"></a>
-
-                     {% else %}
-
-                     <div id="light-bg" class="content">
-                        <div class="ui inverted center aligned container">
-                           <a class="ui massive icon button" href="/static/gallery/{{ file["location"] }}/{{ file["name"] }}">
-                              <i class="file image icon"></i>click to view</a>
-                        </div>
-                     </div>
-
-                     {% endif %}
+                           <img width="100%" src="/static/gallery/{{ file["location"] }}/{{ file["name"] }}"></a>
+                        {% else %}
+                           <div id="light-bg" class="content">
+                              <div class="ui inverted center aligned container">
+                                 <a class="ui massive icon button" href="/static/gallery/{{ file["location"] }}/{{ file["name"] }}"></a>
+                              </div>
+                           </div>
+                        {% endif %}
                      <div class="ui inverted bottom attached button">
-                        <a href="{{ file["location"] }}">{{file["location"].split("/")[-1]}}</a>
+                        <a href="/gallery/{{file["location"] }}">{{file["location"]}}</a>
                      </div>
                   </div>
                   {% endfor %}
