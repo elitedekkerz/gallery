@@ -20,7 +20,21 @@
 <body>
       <div class="ui inverted left vertical sidebar labeled icon menu">
          <a class="item">
-            item</a>
+				 {% if path %}
+					  <nobr>
+						  {% set ns = namespace(p='') %}
+						  {% for l in ["gallery"]+path.split("/") %}
+							 {% set ns.p = ns.p+"/"+l %}
+							 <a href="{{ ns.p }}">{{l}}</a>/
+						  {% endfor %}
+					  </nobr>
+				 {% endif %}
+			</a>
+          {% for dir in dirs %}
+          <a class="item">
+              <a href="/gallery{{"/"+path if path}}/{{ dir }}">{{dir}}</a>
+          {% endfor %}
+          </a>
       </div>
       
 <div class="pusher">
@@ -68,24 +82,12 @@
                   </div>
                
                   {% endif %}
-
-                  <div class="ui content">
-                     <div class="ui circular label">
-                     <span>
-                     <i class="user icon"></i>{{file["location"].split("/")[-1]}}
-                     </span>
-                     </div>
-                     <div class="ui circular toggle icon button">
-                     <i class="thumbs up outline icon"></i>
-                  </div>
-                  </div>
-                  
                   <div class="ui inverted bottom attached button">
-                        <a href="{{ file["location"] }}"><i class="eye icon"></i>View all from this user</a>
+                        <a href="{{ file["location"] }}">{{file["location"].split("/")[-1]}}</a>
                   </div>
                </div>
                {% endfor %}
-            </div>
+					</div>
       </div>
 </div>
 </div>
